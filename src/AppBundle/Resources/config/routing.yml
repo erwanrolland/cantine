@@ -1,0 +1,27 @@
+# src/AppBundle/Resources/config/routing.yml
+
+cantine_home:
+
+    path:      /cantine
+
+    defaults: { _controller: AppBundle:Default:home }
+
+    
+cantine_aujourdhui:
+
+    path:      /cantine/aujourdhui/
+
+    defaults: { _controller: AppBundle:Default:aujourdhui }
+
+    
+cantine_semaine:
+
+    path:      /cantine/semaine
+
+    defaults: { _controller: AppBundle:Default:semaine }
+
+cantine_comptes:
+    
+    path:     /cantine/comptes
+    
+    defaults: { _controller: AppBundle:Default:comptes }

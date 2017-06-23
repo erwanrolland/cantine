@@ -1,0 +1,19 @@
+ER\CantineBundle\Entity\Repas:
+    type: entity
+    table: null
+    repositoryClass: ER\CantineBundle\Repository\RepasRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        daterepas:
+            type: datetime
+        etat:
+            type: string
+    manyToOne:
+        utilisateur:
+            targetEntity: Utilisateur
+            inversedBy: repas

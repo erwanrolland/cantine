@@ -1,0 +1,13 @@
+ER\CantineBundle\Entity\Miseajour:
+    type: entity
+    table: null
+    repositoryClass: ER\CantineBundle\Repository\MiseajourRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        datemaj:
+            type: datetime

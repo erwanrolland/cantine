@@ -1,0 +1,34 @@
+ER\CantineBundle\Entity\Utilisateur:
+    type: entity
+    table: null
+    repositoryClass: ER\CantineBundle\Repository\UtilisateurRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        pass:
+            type: string
+            length: 255
+            nullable: true
+        actif:
+            type: boolean
+        nom:
+            type: string
+            length: 255
+        mail:
+            type: string
+            length: 255
+            unique: true
+            nullable: false
+        total:
+            type: integer
+    oneToMany:
+        courses:
+            targetEntity: Course
+            mappedBy: utilisateur
+        repas:
+            targetEntity: Repas
+            mappedBy: utilisateur

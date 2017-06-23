@@ -1,0 +1,11 @@
+{% extends "ERCantineBundle::layout.html.twig" %}
+
+
+{% block body %}
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ path('cantine_home') }}">Home</a></li>
+                    <li><a href="{{ path('cantine_aujourdhui') }}">Aujourd'hui</a></li>
+                    <li><a href="{{ path('cantine_semaine') }}">Semaine</a></li>
+                    <li><a href="{{ path('cantine_comptes') }}">Comptes</a></li>
+                </ul>
+{% endblock %}

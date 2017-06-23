@@ -1,0 +1,50 @@
+er_cantine_homepage:
+    path:    /
+    defaults: { _controller: ERCantineBundle:Accueil:nav }
+
+cantine_home:
+
+    path:    /accueil
+    defaults: { _controller: ERCantineBundle:Accueil:nav }
+
+    
+cantine_today:
+
+    path:    /aujourdhui
+    defaults: { _controller: ERCantineBundle:Today:nav }
+
+    
+cantine_calendar:
+
+    path:    /calendrier
+    defaults: { _controller: ERCantineBundle:Calendar:nav }
+
+cantine_account:
+    
+    path:    /comptes  
+    defaults: { _controller: ERCantineBundle:Account:nav }
+    
+cantine_addrepas:
+    
+    path:    /aujourdhui/add
+    defaults: { _controller: ERCantineBundle:Today:addRepas }
+    
+cantine_validrepas:
+    
+    path:    /aujourdhui/valid
+    defaults: { _controller: ERCantineBundle:Today:validRepas }
+    
+cantine_cancelrepas:
+    
+    path:    /aujourdhui/cancel
+    defaults: { _controller: ERCantineBundle:Today:cancelRepas }
+    
+cantine_updateaccount:
+    
+    path:    /comptes/update
+    defaults: { _controller: ERCantineBundle:Account:updateAccount }
+
+cantine_addcourse:
+    
+    path:    /comptes/addcourse
+    defaults: { _controller: ERCantineBundle:Account:addCourse }

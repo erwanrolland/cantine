@@ -1,0 +1,162 @@
+parameters:
+    blast:
+
+################################################################################
+# Utilisateur  
+################################################################################
+
+        ER\CantineBundle\Entity\Utilisateur:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            pass: ~
+                            actif: ~
+                            nom: ~
+                            mail: ~
+                            total: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            #id: ~
+                            pass: ~
+                            actif: ~
+                            nom: ~
+                            mail: ~
+                            total: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    id: ~
+                    pass: ~
+                    actif: ~
+                    nom: ~
+                    mail: ~
+                    total: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    id: ~
+                    pass: ~
+                    actif: ~
+                    nom: ~
+                    mail: ~
+                    total: ~
+
+################################################################################
+# Repas  
+################################################################################
+
+        ER\CantineBundle\Entity\Repas:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            daterepas: ~
+                            etat: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                          #  id: ~
+                            daterepas: ~
+                            etat: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    id: ~
+                    daterepas: ~
+                    etat: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    id: ~
+                    daterepas: ~
+                    etat: ~
+
+################################################################################
+# Miseajour  
+################################################################################
+
+        ER\CantineBundle\Entity\Miseajour:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            datemaj: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                        #    id: ~
+                            datemaj: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    id: ~
+                    datemaj: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    id: ~
+                    datemaj: ~
+
+################################################################################
+# Course  
+################################################################################
+
+        ER\CantineBundle\Entity\Course:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            datecourse: ~
+                            prix: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                        #    id: ~
+                            datecourse: ~
+                            prix: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    id: ~
+                    datecourse: ~
+                    prix: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    id: ~
+                    datecourse: ~
+                    prix: ~

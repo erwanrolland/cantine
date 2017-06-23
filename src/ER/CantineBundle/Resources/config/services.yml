@@ -1,0 +1,37 @@
+services:
+    er_cantine.admin.utilisateur:
+        class: ER\CantineBundle\Admin\UtilisateurAdmin
+        arguments: [~, ER\CantineBundle\Entity\Utilisateur, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Utilisateur
+
+    er_cantine.admin.repas:
+        class: ER\CantineBundle\Admin\RepasAdmin
+        arguments: [~, ER\CantineBundle\Entity\Repas, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Repas
+
+    er_cantine.admin.miseajour:
+        class: ER\CantineBundle\Admin\MiseajourAdmin
+        arguments: [~, ER\CantineBundle\Entity\Miseajour, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Miseajour
+
+    er_cantine.admin.course:
+        class: ER\CantineBundle\Admin\CourseAdmin
+        arguments: [~, ER\CantineBundle\Entity\Course, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Course
+
