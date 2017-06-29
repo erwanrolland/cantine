@@ -2,56 +2,87 @@
 
 {% block title %}{{ parent() }} - Aujourdhui{% endblock %}
 
+                {% block menu %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('cantine_home') }}">Home</a></li>
+                    <li class="active"><a href="{{ path('cantine_today') }}">Aujourd'hui</a></li>
+                    <li><a href="{{ path('cantine_calendar') }}">Semaine</a></li>
+                    <li><a href="{{ path('cantine_account') }}">Comptes</a></li>
+                </ul>
+                {% endblock %}
+
+
 {% block body %}
 
     <div class="container">
         <div class="row">
 
             <section class="content">
-                <h1>Aujourdhui</h1>
+                <h1>Aujourdhui: {{datetoday}}</h1>
                 </br>
-                <a href="#" class="btn btn-default">Nombre de repas validé: </a>   
+                {% for message in app.session.flashBag.get('notice') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 </br></br>
                 <a href="#" class="btn btn-default">Nombre de repas prévus: {{countrepas}}</a>
-
         </div>
         <br><br><br>
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="table-container">
-                        <table class="table table-filter">
-                            <tbody>
-                            <td>
-                                <div class="media">
-                                    <a href="#" class="pull-left">
-                                    </a>
-                                    <div class="media-body">
-                                        {% for user in utilisateur%}
-                                            <h4 class="title"></h4>
-                                                <span class="name">
-                                                    {{user.nom}}
-                                                </span>
-                                                <a href="{{path('cantine_addrepas')}}?utilisateur={{user.id}}" class="btn btn-warning btn-filter">Mange</a>
-                                                <a href ="{{path('cantine_cancelrepas')}}?utilisateur={{user.id}}" class="btn btn-danger btn-filter">Annuler</a>
-                                                <a href="{{path('cantine_validrepas')}}?utilisateur={{user.id}}" class="btn btn-success btn-filter">Valider</a>
-                                            {% endfor %}  
-                                        </div>        
-                                    </div>
+                <div class="table-container">
+                    <table class="table table-filter">
+                        <tbody>
+                        <ul>
 
-                                </td>
+                            {% for user in utilisateur%}
+                                <h4 class="title">{{user.nom}}</h4>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                                <a href="{{path('cantine_addrepas')}}?utilisateur={{user.id}}" class="btn btn-primary btn-filter" >Mange</a>
+                                <a href ="{{path('cantine_cancelrepas')}}?utilisateur={{user.id}}" class="btn btn-danger btn-filter">Annuler</a>
+
+                                {% for repas in arrayrepas%}
+                                    {% if repas.utilisateur == user %}
+                                        {% if repas.etat =='mange'%}
+                                            <span class="alert-info" role="alert">
+                                                Etat actuel:
+                                                {{repas.etat}}
+                                            {%endif%}
+                                            {%if repas.etat =='cancel'%}
+                                                <span class="alert-danger" role="alert">
+                                                    Etat actuel:
+                                                    {{repas.etat}}
+                                                {% endif %}
+                                                {%if repas.etat =='valid'%}
+                                                <span class="alert-success" role="alert">
+                                                    Etat actuel:
+                                                    {{repas.etat}}
+                                                {% endif %}
+                                                {%if repas.etat =='cancelvalid'%}
+                                                <span class="alert-danger" role="alert">
+                                                    Etat actuel:
+                                                    {{repas.etat}}
+                                                    {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                {% endfor %}  
+
+                        </ul></br></br>
+                        <ul>
+                            <a href="{{path('cantine_validrepas')}}?utilisateur=all" class="btn btn-success btn-filter">Valider pour tous</a></ul>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="content-footer">
-                </div>
+
             </div>
+            <div class="content-footer">
+            </div>
+        </div>
 
-        </section>
+    </section>
 
-    </div>
+</div>
 </div>              
 {% endblock %}

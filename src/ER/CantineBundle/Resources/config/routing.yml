@@ -48,3 +48,8 @@ cantine_addcourse:
     
     path:    /comptes/addcourse
     defaults: { _controller: ERCantineBundle:Account:addCourse }
+    
+cantine_paymentaccount:
+    
+    path:    /comptes/paymentaccount
+    defaults: { _controller: ERCantineBundle:Account:paymentAccount }

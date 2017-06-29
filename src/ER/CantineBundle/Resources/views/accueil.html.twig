@@ -1,7 +1,14 @@
 {% extends "ERCantineBundle::layout.html.twig" %}
 
 {% block title %}{{ parent() }} - Accueil{% endblock %}
-
+{% block menu %}
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ path('cantine_home') }}">Home</a></li>
+                    <li ><a href="{{ path('cantine_today') }}">Aujourd'hui</a></li>
+                    <li><a href="{{ path('cantine_calendar') }}">Semaine</a></li>
+                    <li ><a href="{{ path('cantine_account') }}">Comptes</a></li>
+                </ul>
+                {% endblock %}
 
 {% block body %}
 
