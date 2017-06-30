@@ -1,59 +1,64 @@
 {% extends "ERCantineBundle::layout.html.twig" %}
 
 {% block title %}{{ parent() }} - Comptes{% endblock %}
-                {% block menu %}
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ path('cantine_home') }}">Home</a></li>
-                    <li ><a href="{{ path('cantine_today') }}">Aujourd'hui</a></li>
-                    <li><a href="{{ path('cantine_calendar') }}">Semaine</a></li>
-                    <li class="active"><a href="{{ path('cantine_account') }}">Comptes</a></li>
-                </ul>
-                {% endblock %}
+{% block menu %}
+    <ul class="nav navbar-nav">
+        <li><a href="{{ path('cantine_home') }}">Home</a></li>
+        <li ><a href="{{ path('cantine_today') }}">Aujourd'hui</a></li>
+        <li><a href="{{ path('cantine_calendar') }}">Semaine</a></li>
+        <li class="active"><a href="{{ path('cantine_account') }}">Comptes</a></li>
+    </ul>
+{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Comptes: </h1>
-        </br></br></br></br></br>
-        <a class="btn btn-default">Derniere maj : {{lastupdate}}</a>
-    <a href="{{path('cantine_updateaccount')}}" class="btn btn-warning btn-filter">Mise à jour</a>
-    <a href="#" class="btn btn-default">Total courses : {{somme}}&euro;</a>   
-    <a href="#" class="btn btn-default">Nombre repas : {{count}}</a>
-    <a href="#" class="btn btn-default">Prix repas unité : {{prixrepas}}&euro;</a>
-        <div class="row">
-            <div class="col-md-12">
+        <h1>Comptes: </h1>                
+        {% for message in app.session.flashBag.get('count') %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+            </br></br></br></br></br>
+            <a class="btn btn-default">Derniere maj : {{lastupdate}}</a>
+            <a href="{{path('cantine_updateaccount')}}" class="btn btn-warning btn-filter">Mise à jour</a>
+            <a href="#" class="btn btn-default">Total courses : {{somme}}&euro;</a>   
+            <a href="#" class="btn btn-default">Nombre repas : {{count}}</a>
+            <a href="#" class="btn btn-default">Prix repas unité : {{prixrepas}}&euro;</a>
+            <div class="row">
+                <div class="col-md-12">
 
 
-                <div class="table-responsive">
-                    <table id="mytable" class="table table-bordred table-striped">
-                        <thead>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Total due</th>
-                        </thead>
-                        <tbody>
-                            {% for user in utilisateur%}
-                                <tr>
-                                    <td>{{user.nom}}</td>
-                                    <td>{{user.mail}}</td>
-                                    <td>{{user.total}}&euro;</td>
-                                    <td><form action="{{path('cantine_addcourse')}}?utilisateur={{user.id}}"  class="form-inline"method="POST">
-                                            <div class="form-group">
-                                                <input type="text"  name="addcourse" class="col-xs-4">
-                                                <button type="submit" class="btn btn-success btn-filter">Ajout Course</button>
-                                            </div>
-                                        </form> </td>
-                                    <td><form action="{{path('cantine_paymentaccount')}}?utilisateur={{user.id}}" class="form-inline" method="POST">
-                                            <div class="form-group">
-                                                <input type="text" name="paymentaccount" class="col-xs-4">
-                                                <button type="submit" class="btn btn-success btn-filter">Paiement</button>
-                                            </div>
-                                        </form> </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordred table-striped">
+                            <thead>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Total due</th>
+                            </thead>
+                            <tbody>
+                                {% for user in utilisateur%}
+                                    <tr>
+                                        <td>{{user.nom}}</td>
+                                        <td>{{user.mail}}</td>
+                                        <td>{{user.total}}&euro;</td>
+                                        <td><form action="{{path('cantine_addcourse')}}?utilisateur={{user.id}}"  class="form-inline"method="POST">
+                                                <div class="form-group">
+                                                    <input type="text"  name="addcourse" class="col-xs-4">
+                                                    <button type="submit" class="btn btn-success btn-filter">Ajout Course</button>
+                                                </div>
+                                            </form> </td>
+                                        <td><form action="{{path('cantine_paymentaccount')}}?utilisateur={{user.id}}" class="form-inline" method="POST">
+                                                <div class="form-group">
+                                                    <input type="text" name="paymentaccount" class="col-xs-4">
+                                                    <button type="submit" class="btn btn-success btn-filter">Paiement</button>
+                                                </div>
+                                            </form> </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
 
-                </div>
-                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-            {% endblock %}
+                    </div>
+                    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+                    {% endblock %}

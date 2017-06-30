@@ -64,24 +64,26 @@ class AccountController extends Controller {
         $lastupd = $maj->findOneById($lastId);
         $lastupdate = $lastupd->getDatemaj()->format('Y-m-d H:i:s');
         $somme = $course->findSommeBetweenTwoDate($lastupdate, $date1);
-
+        $count = $repas->findNbRepasByEtatAndDate($lastupdate, $date1, 'valid');
+        if($count == 0){
+            $this->addFlash('count', 'Aucun repas validé depuis la dernière mise à jour');
+            return $this->render('ERCantineBundle::comptes.html.twig', $this->parametersToArray());
+        }
         foreach ($utilisateurs as $user) {
-            $test = $repas->findNbRepasByUser($lastupdate, $date1, $user->getId());
+            $count = $repas->findNbRepasByUser($lastupdate, $date1, $user->getId());
             $oldtotal = $user->getTotal();
-            $newtotal = ($test * $somme) + $oldtotal;
+            $newtotal = ($count * $somme) + $oldtotal;
 
             $user->setTotal($newtotal);
             $em->persist($user);
         }
-
-
 
         $datemaj = new \DateTime();
         $miseajour = new Miseajour();
         $miseajour->setDatemaj($datemaj);
         $em->persist($miseajour);
         $em->flush();
-
+        $this->addFlash('count', 'mise à jour');
         return $this->render('ERCantineBundle::comptes.html.twig', $this->parametersToArray());
     }
 
