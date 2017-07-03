@@ -9,13 +9,5 @@ namespace ER\CantineBundle\Repository;
  * repository methods below.
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository {
-//
-//            public function findNbRepasByUser($date1,$date2){
-//        $dql = "SELECT u.repas FROM ER\CantineBundle\Entity\Utilisateur u WHERE  u.repas.daterepas BETWEEN '$date1' and '$date2'";
-//                $count = $this->_em->createQuery($dql)
-//              ->getSingleScalarResult();
-//                
-//                    return $count;
-//            }
-
+    
 }

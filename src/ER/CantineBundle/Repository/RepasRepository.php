@@ -10,47 +10,50 @@ namespace ER\CantineBundle\Repository;
  */
 class RepasRepository extends \Doctrine\ORM\EntityRepository {
 
-    public function findNbRepasByDate($date1, $date2) {
-        $dql = "SELECT COUNT(r.id) FROM ER\CantineBundle\Entity\Repas r WHERE r.daterepas  BETWEEN '$date1' and '$date2'";
-        $count = $this->_em->createQuery($dql)
-                ->getSingleScalarResult();
-        return $count;
-    }
-
     public function findNbRepasByUser($date1, $date2, $user) {
 
-        $dql = "SELECT COUNT(r.id) FROM ER\CantineBundle\Entity\Repas r WHERE r.etat = 'valid' AND(r.utilisateur = $user) AND(r.daterepas  BETWEEN '$date1' and '$date2')";
-        $repas = $this->_em->createQuery($dql)
+
+        $query = $this->_em->createQuery("SELECT COUNT(r.id) FROM ERCantineBundle:Repas r WHERE r.etat = 'valid' AND(r.utilisateur = :user)AND(r.daterepas BETWEEN :date1 and :date2)");
+        $query->setParameter('date1', $date1);
+        $query->setParameter('date2', $date2);
+        $query->setParameter('user', $user);
+        $repas = $query
                 ->getSingleScalarResult();
+
         return $repas;
     }
 
     public function findNbRepasByEtatAndDate($date1, $date2, $etat) {
-        $dql = "SELECT COUNT(r.id) FROM ER\CantineBundle\Entity\Repas r WHERE r.etat = '$etat' AND(r.daterepas BETWEEN '$date1' and '$date2') ";
-        $count = $this->_em->createQuery($dql)
+        $query = $this->_em->createQuery("SELECT COUNT(r.id) FROM ERCantineBundle:Repas r WHERE r.etat = :etat AND(r.daterepas BETWEEN :date1 and :date2)");
+        $query->setParameter('etat', $etat);
+        $query->setParameter('date1', $date1);
+        $query->setParameter('date2', $date2);
+        $count = $query
                 ->getSingleScalarResult();
+
         return $count;
     }
 
     public function findRepasBydate($date1, $date2) {
-        $dql = "SELECT r FROM ER\CantineBundle\Entity\Repas r WHERE r.daterepas BETWEEN '$date1' and '$date2'";
-        $repas = $this->_em->createQuery($dql)
+        $query = $this->_em->createQuery("SELECT r FROM ERCantineBundle:Repas r WHERE r.daterepas BETWEEN :date1 and :date2");
+        $query->setParameter('date1', $date1);
+        $query->setParameter('date2', $date2);
+        $repas = $query
                 ->getResult();
+
         return $repas;
     }
 
     public function findRepasBydateAndUtilisateur($date1, $date2, $userid) {
-        $dql = "SELECT r FROM ER\CantineBundle\Entity\Repas r WHERE r.utilisateur = $userid AND(r.daterepas BETWEEN '$date1' and '$date2')";
-        $repas = $this->_em->createQuery($dql)
-                ->getResult();
-        return $repas;
-    }
 
-    public function findNbrepasByUserBetween($date1, $date2, $user) {
-        $dql = "SELECT COUNT(r.id) FROM ER\CantineBundle\Entity\Repas r WHERE r.utilisateur=$user AND(r.daterepas BETWEEN '$date1' and '$date2')";
-        $countrepas = $this->_em->createQuery($dql)
+        $query = $this->_em->createQuery("SELECT r FROM ERCantineBundle:Repas r WHERE r.utilisateur = :userid AND(r.daterepas BETWEEN :date1 and :date2)");
+        $query->setParameter('date1', $date1);
+        $query->setParameter('date2', $date2);
+        $query->setParameter('userid', $userid);
+        $repas = $query
                 ->getResult();
-        return $countrepas;
+
+        return $repas;
     }
 
 }
