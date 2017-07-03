@@ -30,7 +30,6 @@ class TodayController extends Controller {
     }
 
     public function navAction() {
-        $this->addFlash('notice', "S'inscrire");
         return $this->render('ERCantineBundle::aujourdhui.html.twig', $this->parametersToArray());
     }
 
