@@ -14,12 +14,7 @@
                     <a class="navbar-brand" href="#">Cantine</a>
                 </div>
                 {% block menu %}
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ path('cantine_home') }}">Home</a></li>
-                    <li><a href="{{ path('cantine_today') }}">Aujourd'hui</a></li>
-                    <li><a href="{{ path('cantine_calendar') }}">Semaine</a></li>
-                    <li><a href="{{ path('cantine_account') }}">Comptes</a></li>
-                </ul>
+ {% include 'menu.html' %}
                 {% endblock %}
             </div>
         </nav>

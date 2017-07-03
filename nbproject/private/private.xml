@@ -7,6 +7,7 @@
             <file>file:/home/erwan/cantine/src/ER/CantineBundle/Resources/views/aujourdhui.html.twig</file>
             <file>file:/home/erwan/cantine/src/ER/CantineBundle/Controller/AccountController.php</file>
             <file>file:/home/erwan/cantine/src/ER/CantineBundle/Controller/TodayController.php</file>
+            <file>file:/home/erwan/cantine/src/ER/CantineBundle/Controller/AccueilController.php</file>
         </group>
     </open-files>
 </project-private>

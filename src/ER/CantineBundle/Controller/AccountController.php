@@ -12,11 +12,8 @@ class AccountController extends Controller {
     public function parametersToArray() {
         $em = $this->getDoctrine()->getManager();
         $course = $em->getRepository('ERCantineBundle:Course');
-
         $repas = $em->getRepository('ERCantineBundle:Repas');
         $date1 = date('Y-m-d H:i:s');
-
-
         $utilisateurRepository = $em->getRepository('ERCantineBundle:Utilisateur');
         $utilisateurs = $utilisateurRepository->findBy(['actif' => true]);
         $maj = $em->getRepository('ERCantineBundle:Miseajour');
@@ -48,6 +45,19 @@ class AccountController extends Controller {
     }
 
     public function navAction() {
+        $em = $this->getDoctrine()->getManager();
+        $maj = $em->getRepository('ERCantineBundle:Miseajour');
+        $lastarray = $maj->findLastUpdate();
+        $lastId = $lastarray[0][1];
+        $lastupd = $maj->findOneById($lastId);
+        if (empty($lastupd)) {
+            $datemaj = new \DateTime();
+            $lastupdate = new Miseajour();
+            $lastupdate->setDatemaj($datemaj);
+            $em->persist($lastupdate);
+            $em->flush();
+        }
+
         return $this->render('ERCantineBundle::comptes.html.twig', $this->parametersToArray());
     }
 
@@ -65,7 +75,7 @@ class AccountController extends Controller {
         $lastupdate = $lastupd->getDatemaj()->format('Y-m-d H:i:s');
         $somme = $course->findSommeBetweenTwoDate($lastupdate, $date1);
         $count = $repas->findNbRepasByEtatAndDate($lastupdate, $date1, 'valid');
-        if($count == 0){
+        if ($count == 0) {
             $this->addFlash('count', 'Aucun repas validé depuis la dernière mise à jour');
             return $this->render('ERCantineBundle::comptes.html.twig', $this->parametersToArray());
         }
