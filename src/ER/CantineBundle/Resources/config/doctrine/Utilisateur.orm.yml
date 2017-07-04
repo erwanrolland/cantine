@@ -29,6 +29,8 @@ ER\CantineBundle\Entity\Utilisateur:
         courses:
             targetEntity: Course
             mappedBy: utilisateur
+            cascade: ["remove"] 
         repas:
             targetEntity: Repas
             mappedBy: utilisateur
+            cascade: ["remove"] 

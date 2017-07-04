@@ -17,4 +17,3 @@ ER\CantineBundle\Entity\Course:
         utilisateur:
             targetEntity: Utilisateur
             inversedBy: courses
-        
