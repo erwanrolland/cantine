@@ -17,10 +17,7 @@ class AccountController extends Controller {
         $utilisateurRepository = $em->getRepository('ERCantineBundle:Utilisateur');
         $utilisateurs = $utilisateurRepository->findBy(['actif' => true]);
         $maj = $em->getRepository('ERCantineBundle:Miseajour');
-        $lastarray = $maj->findLastUpdate();
-        $lastId = $lastarray[0][1];
-        $lastupd = $maj->findOneById($lastId);
-        $lastupdate = $lastupd->getDatemaj()->format('Y-m-d H:i:s');
+        $lastupdate=$maj->findLastUpdate();
         $somme = $course->findSommeBetweenTwoDate($lastupdate, $date1);
         $count = $repas->findNbRepasByEtatAndDate($lastupdate, $date1, 'valid');
         if ($count == 0) {
@@ -47,11 +44,10 @@ class AccountController extends Controller {
     public function navAction() {
         $em = $this->getDoctrine()->getManager();
         $maj = $em->getRepository('ERCantineBundle:Miseajour');
-        $lastarray = $maj->findLastUpdate();
-        $lastId = $lastarray[0][1];
-        $lastupd = $maj->findOneById($lastId);
-        if (empty($lastupd)) {
-            $datemaj = new \DateTime();
+        $lastupdate=$maj->findLastUpdate();
+      
+        if (empty($lastupdate)) {
+            $datemaj = new \DateTime('2017-07-03 00:00:00');
             $lastupdate = new Miseajour();
             $lastupdate->setDatemaj($datemaj);
             $em->persist($lastupdate);
@@ -69,20 +65,20 @@ class AccountController extends Controller {
         $repas = $em->getRepository('ERCantineBundle:Repas');
         $maj = $em->getRepository('ERCantineBundle:Miseajour');
         $date1 = date('Y-m-d H:i:s');
-        $lastarray = $maj->findLastUpdate();
-        $lastId = $lastarray[0][1];
-        $lastupd = $maj->findOneById($lastId);
-        $lastupdate = $lastupd->getDatemaj()->format('Y-m-d H:i:s');
+        $lastupdate= $maj->findLastUpdate();
         $somme = $course->findSommeBetweenTwoDate($lastupdate, $date1);
         $count = $repas->findNbRepasByEtatAndDate($lastupdate, $date1, 'valid');
+
         if ($count == 0) {
             $this->addFlash('count', 'Aucun repas validé depuis la dernière mise à jour');
             return $this->render('ERCantineBundle::comptes.html.twig', $this->parametersToArray());
         }
+        $unitprice = $somme / $count;
         foreach ($utilisateurs as $user) {
-            $count = $repas->findNbRepasByUser($lastupdate, $date1, $user->getId());
+            $userid = $user->getId();
+            $count = $repas->findNbRepasByUser($lastupdate, $date1, $userid);
             $oldtotal = $user->getTotal();
-            $newtotal = ($count * $somme) + $oldtotal;
+            $newtotal = ($count * $unitprice) + $oldtotal;
 
             $user->setTotal($newtotal);
             $em->persist($user);

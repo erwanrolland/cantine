@@ -1,12 +1,5 @@
 services:
-    er_cantine.admin.utilisateur:
-        class: ER\CantineBundle\Admin\UtilisateurAdmin
-        arguments: [~, ER\CantineBundle\Entity\Utilisateur, BlastCoreBundle:CRUD]
-        tags:
-            - name: sonata.admin
-              manager_type: orm
-              group: admin
-              label: Utilisateur
+
 
     er_cantine.admin.repas:
         class: ER\CantineBundle\Admin\RepasAdmin
@@ -34,4 +27,13 @@ services:
               manager_type: orm
               group: admin
               label: Course
+
+    er_cantine.admin.utilisateur:
+        class: ER\CantineBundle\Admin\UtilisateurAdmin
+        arguments: [~, ER\CantineBundle\Entity\Utilisateur, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Utilisateur
 
