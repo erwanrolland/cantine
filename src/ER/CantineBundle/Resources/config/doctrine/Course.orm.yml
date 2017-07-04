@@ -12,7 +12,7 @@ ER\CantineBundle\Entity\Course:
         datecourse:
             type: datetime
         prix:
-            type: integer
+            type: float
     manyToOne:
         utilisateur:
             targetEntity: Utilisateur

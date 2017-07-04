@@ -30,7 +30,7 @@ class Utilisateur {
      */
     private $nom;
     /**
-     * @var int
+     * @var float
      */
     private $total;
     /**

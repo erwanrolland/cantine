@@ -18,7 +18,7 @@ class Course {
     private $datecourse;
 
     /**
-     * @var int
+     * @var float
      */
     private $prix;
 
@@ -48,7 +48,7 @@ class Course {
     /**
      * Set prix
      *
-     * @param integer $prix
+     * @param float $prix
      *
      * @return Course
      */
@@ -61,7 +61,7 @@ class Course {
     /**
      * Get prix
      *
-     * @return int
+     * @return float
      */
     public function getPrix() {
         return $this->prix;

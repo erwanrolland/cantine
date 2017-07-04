@@ -11,11 +11,13 @@ namespace ER\CantineBundle\Repository;
 class MiseajourRepository extends \Doctrine\ORM\EntityRepository {
 
     public function findLastUpdate() {
-        $query = $this->_em->createQuery("SELECT MAX(m) FROM ERCantineBundle:Miseajour m ");
+        
+        $dql = "select max(m.datemaj) from ER\CantineBundle\Entity\Miseajour m";
+        $query = $this->_em->createQuery($dql);
         $max = $query
-                ->getResult();
+                ->getSingleScalarResult();
 
         return $max;
-    }
-
+   
+}
 }

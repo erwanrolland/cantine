@@ -19,13 +19,16 @@ class CourseRepository extends \Doctrine\ORM\EntityRepository {
 
     public function findSommeBetweenTwoDate($date1, $date2) {
 
-        $query = $this->_em->createQuery("SELECT SUM(c.prix) FROM ERCantineBundle:Course c where c.datecourse between :date1 and :date2");
-        $query->setParameters('date1', $date1);
-        $query->setParameters('date2', $date2);
+        $query = $this->_em->createQuery("SELECT SUM(c.prix) FROM ERCantineBundle:Course c WHERE c.datecourse BETWEEN :date1 and :date2");
+        $query->setParameter('date1', $date1);
+        $query->setParameter('date2', $date2);
         $somme = $query
                 ->getSingleScalarResult();
 
         return $somme;
     }
+    
+    
+    
 
 }

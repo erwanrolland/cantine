@@ -24,7 +24,7 @@ ER\CantineBundle\Entity\Utilisateur:
             unique: true
             nullable: false
         total:
-            type: integer
+            type: float
     oneToMany:
         courses:
             targetEntity: Course
